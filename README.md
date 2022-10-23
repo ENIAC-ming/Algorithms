@@ -82,7 +82,6 @@ string times(string a, string b)
 	ans.erase(ans.find_last_not_of('0') + 1);
 	return ans.empty() ? "0" : string(ans.rbegin(), ans.rend());
 }
- 
 
 pair<string, string> divide2(string a, string b)//高精除以高精
 {
