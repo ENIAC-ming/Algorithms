@@ -217,3 +217,78 @@ void addEdge(int x, int y, int len) {	//加边x --len--> y
     head[x] = tot; 
 }
 ```
+
+### 拓扑排序
+```cpp
+vector<int> G[maxn];
+int deg[maxn];
+void addEdge(int u, int v) {
+    G[u].push_back(v);
+    deg[v]++;
+}
+int seq[maxn];
+bool toposort(int n) {
+    queue<int> q;
+    for (int i = 1; i <= n; i++) {
+        if (deg[i] == 0)
+        {
+            q.push(i);
+        }
+    }
+    int ncnt = 0;
+    while (!q.empty()) {
+        int u = q.front();
+        q.pop();
+        seq[++ncnt] = u;
+        for (int i = 0; i < G[u].size(); i++) {
+            int v = G[u][i];
+            deg[v] -= 1;
+            if(deg[v] == 0) {
+                q.push(v);
+            }
+        }
+    }
+    return ncnt == n;
+}
+```
+
+### Kruskal
+```cpp
+// -->> 并查集 <<-- //
+struct Edge {
+    int u, v, w;
+} e[maxm];
+int ecnt;
+int Kruskal() {
+    init()
+    sort(e + 1, e + ecnt + 1, cmp);
+    int cnt = 0;
+    int ans = 0;
+    for (int i = 1; i <= ecnt; i++) {
+        int u = e[i].u;
+        int v = e[i].v;
+        u = get(u);
+        v = get(v);
+        if(u != v) {
+            fa[u] = v;
+            cnt++;
+            ans = max(ans, e[i].w);
+        }
+    }
+    return (cnt == n ? ans : -1);
+}
+```
+
+### 快速幂
+```cpp
+int qpow(int a, int n){
+    int ans = 1;
+    while(n){
+        if(n&1)        //如果n的当前末位为1
+            ans *= a;  //ans乘上当前的a
+        a *= a;        //a自乘
+        n >>= 1;       //n往右移一位
+    }
+    return ans;
+}
+```
