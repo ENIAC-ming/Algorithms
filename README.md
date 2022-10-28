@@ -292,3 +292,25 @@ int qpow(int a, int n){
     return ans;
 }
 ```
+
+### 线段数组[（视频讲解）](https://b23.tv/7ohQVP0)
+```cpp
+int b[N] = {}, N;
+inline int lowbit(int x) {
+	return x & (-x);
+}
+void add(int p, int x) {
+	while (p < N) {
+		b[p] += x;
+		p += lowbit(p);
+	}
+}
+int count(int p) {
+	int res = 0;
+	while (p) {
+		res += p[b];
+		p -= lowbit(p);
+	}
+	return res;
+}
+```
